@@ -55,89 +55,55 @@ git clone <url-do-repositorio>
 cd api-login-teste
 ```
 
-### 2. Instale as dependências
+### 2. Crie e ative um ambiente virtual (Recomendado)
 ```bash
-pip install fastapi uvicorn jinja2 python-multipart itsdangerous sqlalchemy bcrypt pytest
+python -m venv .venv
+source .venv/bin/activate
 ```
 
-### 3. Execute a aplicação
+### 3. Instale as dependências
+```bash
+pip install -r requirements.txt
+```
+*(Nota: Você precisará criar um arquivo `requirements.txt` com `pip freeze > requirements.txt`)*
+
+### 4. Execute a aplicação
 ```bash
 uvicorn main:app --reload
 ```
 
-### 4. Acesse no navegador
-- **Aplicação:** http://localhost:8000
-- **Documentação API:** http://localhost:8000/docs
+### 5. Acesse no navegador
+- **Aplicação Web:** http://localhost:8000
+- **Documentação da API:** http://localhost:8000/docs
 
 ## 📖 Como Usar
 
-### 1. **Cadastro de Usuário**
-- Acesse `/cadastro` ou clique em "Cadastrar novo usuário"
-- Insira nome de usuário, senha e email
-- Clique em "Cadastrar"
-
-### 2. **Login**
-- Na página inicial, insira suas credenciais
-- Clique em "Entrar"
-- Será redirecionado para o dashboard
-
-### 3. **Dashboard**
-- Área protegida que só usuários logados podem acessar
-- Exibe informações do usuário logado
-- Botão de logout disponível
-
-### 4. **Logout**
-- Clique em "Logout Seguro" no dashboard
-- Sessão será limpa e redirecionamento para login
-
-### 5. **Recuperação de Senha**
-- Acesse `/recuperar_senha`
-- Insira seu email
-- Siga as instruções enviadas por email
-
-### 6. **Redefinição de Senha**
-- Acesse `/redefinir_senha`
-- Insira sua nova senha
-- Confirme a nova senha
-- Clique em "Redefinir Senha"
+A aplicação possui uma interface web intuitiva para cadastro, login, recuperação de senha e um dashboard. A API REST pode ser utilizada por outras aplicações para autenticação.
 
 ## 🛡️ Segurança
 
-- **Sessões criptografadas** com chave secreta aleatória
-- **Middleware de sessão** do Starlette
-- **Proteção de rotas** - dashboard só acessível se logado
-- **Redirecionamentos automáticos** para páginas apropriadas
-- **Tokens seguros** para recuperação de senha
-- **Hash de senhas** com bcrypt
+- **Senhas com Hash**: As senhas são protegidas usando `bcrypt`.
+- **Sessões Criptografadas**: A interface web usa sessões seguras do Starlette.
+- **Tokens JWT**: A API REST é protegida com JSON Web Tokens.
+- **Proteção de Rotas**: Rotas sensíveis (como o dashboard) são protegidas.
 
 ## 🔄 Rotas da API
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/` | Página de login |
-| POST | `/login` | Processa login |
-| GET | `/cadastro` | Página de cadastro |
-| POST | `/cadastro` | Processa cadastro |
-| GET | `/dashboard` | Dashboard protegido |
-| GET | `/logout` | Logout e limpeza de sessão |
-| GET | `/recuperar_senha` | Página de recuperação de senha |
-| POST | `/recuperar_senha` | Envia email de recuperação |
-| GET | `/redefinir_senha` | Página de redefinição de senha |
-| POST | `/redefinir_senha` | Atualiza senha no banco de dados |
-| GET | `/favicon.ico` | Ícone do site |
-
-## ⚠️ Observações
-
-- **Para desenvolvimento apenas**: Os usuários são armazenados em memória
-- **Senhas em texto puro**: Para produção, use hash (bcrypt, argon2, etc.)
-- **Banco de dados**: Para produção, implemente SQLite, PostgreSQL, etc.
+| Método | Rota | Descrição | Autenticação |
+|--------|------|-----------|--------------|
+| POST | `/api/register` | Registra um novo usuário | Nenhuma |
+| POST | `/api/token` | Realiza login e retorna um token JWT | Nenhuma |
+| GET | `/api/users/me`| Retorna dados do usuário logado | Token JWT |
 
 ## 🚀 Melhorias Futuras
 
-- [ ] Validação de email
-- [ ] CSS/Bootstrap para interface
-- [ ] API REST endpoints
-- [ ] Testes automatizados
+- [x] Hash de senhas com bcrypt
+- [x] Banco de dados SQLite/PostgreSQL
+- [x] Validação de email
+- [x] Recuperação de senha
+- [x] CSS/Bootstrap para interface
+- [x] API REST endpoints
+- [x] Testes automatizados
 
 ## 📝 Licença
 
@@ -146,4 +112,3 @@ Este projeto é livre para uso educacional e desenvolvimento.
 ---
 
 **Desenvolvido com ❤️ usando FastAPI**
-
