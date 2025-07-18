@@ -1,0 +1,15 @@
+# --- Dependências da Aplicação ---
+fastapi
+uvicorn[standard]
+jinja2
+sqlalchemy
+python-multipart
+bcrypt
+email-validator
+python-jose[cryptography]
+passlib[bcrypt]
+itsdangerous # Dependência para SessionMiddleware
+
+# --- Dependências de Desenvolvimento (Testes) ---
+pytest
+httpx
