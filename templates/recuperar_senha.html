@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Recuperar Senha{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <h2 class="card-title text-center mb-4">Recuperar Senha</h2>
+
+    {% if mensagem %}
+    <div class="alert alert-info" role="alert">
+        {{ mensagem }}
+    </div>
+    {% endif %}
+
+    <form method="post" action="/recuperar-senha">
+        <div class="mb-3">
+            <label for="email" class="form-label">Seu Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Enviar Link de Recuperação</button>
+        </div>
+    </form>
+    <hr>
+    <div class="text-center">
+        <a href="/">Voltar para login</a>
+    </div>
+    {% endblock %}
+</body>
+</html>

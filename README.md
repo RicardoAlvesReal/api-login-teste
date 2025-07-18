@@ -5,18 +5,24 @@ Uma aplicação web simples de autenticação desenvolvida com FastAPI, incluind
 ## 🚀 Funcionalidades
 
 - ✅ **Login de usuários** com validação
-- ✅ **Cadastro de novos usuários**
+- ✅ **Cadastro de novos usuários** com validação de email
 - ✅ **Dashboard protegido** com sessões
 - ✅ **Logout seguro** com limpeza de sessão
-- ✅ **Interface web** responsiva com templates HTML
-- ✅ **Favicon e logo personalizados**
-- ✅ **Middleware de sessão** para segurança
+- ✅ **Recuperação de senha** com token seguro
+- ✅ **Interface web** responsiva com Bootstrap
+- ✅ **API REST** com autenticação JWT
+- ✅ **Senhas seguras** com hash bcrypt
+- ✅ **Banco de dados SQLite** para persistência de dados
+- ✅ **Testes automatizados** com Pytest
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **FastAPI** - Framework web moderno e rápido para Python
+- **SQLAlchemy** - ORM para interação com o banco de dados
 - **Jinja2** - Engine de templates para renderização HTML
-- **Starlette** - Framework ASGI para middleware de sessões
+- **Bootstrap** - Framework CSS para interface responsiva
+- **Bcrypt** - Biblioteca para hash de senhas
+- **Pytest** - Framework para testes automatizados
 - **Python 3.10+** - Linguagem de programação
 
 ## 📁 Estrutura do Projeto
@@ -24,14 +30,21 @@ Uma aplicação web simples de autenticação desenvolvida com FastAPI, incluind
 ```
 api-login-teste/
 ├── main.py                 # Aplicação principal FastAPI
+├── auth.py                 # Lógica de autenticação JWT
+├── database.py             # Configuração do banco de dados
+├── test_main.py            # Testes automatizados
+├── usuarios.db             # Arquivo do banco de dados SQLite
 ├── templates/              # Templates HTML
-│   ├── login.html          # Página de login
-│   ├── cadastro.html       # Página de cadastro
-│   └── dashboard.html      # Dashboard do usuário
+│   ├── base.html
+│   ├── login.html
+│   ├── cadastro.html
+│   ├── dashboard.html
+│   ├── recuperar_senha.html
+│   └── redefinir_senha.html
 ├── static/                 # Arquivos estáticos
-│   ├── favicon.ico         # Ícone do site
-│   └── TJES-logo.png      # Logo da aplicação
-└── README.md              # Este arquivo
+│   ├── favicon.ico
+│   └── TJES-logo.png
+└── README.md               # Este arquivo
 ```
 
 ## 🔧 Instalação e Configuração
@@ -44,7 +57,7 @@ cd api-login-teste
 
 ### 2. Instale as dependências
 ```bash
-pip install fastapi uvicorn jinja2 python-multipart itsdangerous
+pip install fastapi uvicorn jinja2 python-multipart itsdangerous sqlalchemy bcrypt pytest
 ```
 
 ### 3. Execute a aplicação
@@ -60,7 +73,7 @@ uvicorn main:app --reload
 
 ### 1. **Cadastro de Usuário**
 - Acesse `/cadastro` ou clique em "Cadastrar novo usuário"
-- Insira nome de usuário e senha
+- Insira nome de usuário, senha e email
 - Clique em "Cadastrar"
 
 ### 2. **Login**
@@ -77,12 +90,25 @@ uvicorn main:app --reload
 - Clique em "Logout Seguro" no dashboard
 - Sessão será limpa e redirecionamento para login
 
+### 5. **Recuperação de Senha**
+- Acesse `/recuperar_senha`
+- Insira seu email
+- Siga as instruções enviadas por email
+
+### 6. **Redefinição de Senha**
+- Acesse `/redefinir_senha`
+- Insira sua nova senha
+- Confirme a nova senha
+- Clique em "Redefinir Senha"
+
 ## 🛡️ Segurança
 
 - **Sessões criptografadas** com chave secreta aleatória
 - **Middleware de sessão** do Starlette
 - **Proteção de rotas** - dashboard só acessível se logado
 - **Redirecionamentos automáticos** para páginas apropriadas
+- **Tokens seguros** para recuperação de senha
+- **Hash de senhas** com bcrypt
 
 ## 🔄 Rotas da API
 
@@ -94,6 +120,10 @@ uvicorn main:app --reload
 | POST | `/cadastro` | Processa cadastro |
 | GET | `/dashboard` | Dashboard protegido |
 | GET | `/logout` | Logout e limpeza de sessão |
+| GET | `/recuperar_senha` | Página de recuperação de senha |
+| POST | `/recuperar_senha` | Envia email de recuperação |
+| GET | `/redefinir_senha` | Página de redefinição de senha |
+| POST | `/redefinir_senha` | Atualiza senha no banco de dados |
 | GET | `/favicon.ico` | Ícone do site |
 
 ## ⚠️ Observações
@@ -104,10 +134,7 @@ uvicorn main:app --reload
 
 ## 🚀 Melhorias Futuras
 
-- [ ] Hash de senhas com bcrypt
-- [ ] Banco de dados SQLite/PostgreSQL
 - [ ] Validação de email
-- [ ] Recuperação de senha
 - [ ] CSS/Bootstrap para interface
 - [ ] API REST endpoints
 - [ ] Testes automatizados

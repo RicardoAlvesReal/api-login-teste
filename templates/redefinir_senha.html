@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Redefinir Senha{% endblock %}
+
+{% block content %}
+    <h2 class="card-title text-center mb-4">Redefinir Senha</h2>
+
+    {% if mensagem %}
+    <div class="alert alert-danger" role="alert">
+        {{ mensagem }}
+    </div>
+    {% endif %}
+
+    <form method="post" action="/redefinir-senha">
+        <input type="hidden" name="token" value="{{ token }}">
+        <div class="mb-3">
+            <label for="nova_senha" class="form-label">Nova Senha</label>
+            <input type="password" class="form-control" id="nova_senha" name="nova_senha" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Salvar Nova Senha</button>
+        </div>
+    </form>
+{% endblock %}
