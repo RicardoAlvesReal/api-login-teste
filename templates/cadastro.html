@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+    <img src="/static/TJES-logo.png" alt="Logo" style="width:100px;height:100px;"><br>
+    <h2>Cadastro</h2>
+    <form method="post" action="/cadastro">
+        <input type="text" name="username" placeholder="Usuário" required><br>
+        <input type="password" name="password" placeholder="Senha" required><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <p style="color:red;">{{ mensagem }}</p>
+    <a href="/">Voltar para login</a>
+</body>
+</html>
