@@ -65,6 +65,7 @@ source .venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
+Anotei para não esquecer do comando para criar o "TXT".
 *(Nota: Você precisará criar um arquivo `requirements.txt` com `pip freeze > requirements.txt`)*
 
 ### 4. Execute a aplicação
